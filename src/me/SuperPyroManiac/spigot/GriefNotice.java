@@ -1,7 +1,6 @@
 package me.SuperPyroManiac.spigot;
 
 import java.io.File;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -59,12 +58,12 @@ public class GriefNotice
       }
       System.out.println("Table created successfully");
     }
-    try
-    {
-      MetricsLite metrics = new MetricsLite(this);
-      metrics.start();
-    }
-    catch (IOException localIOException) {}
+//    try
+//    {
+//      MetricsLite metrics = new MetricsLite(this);
+//      metrics.start();
+//    }
+//    catch (IOException localIOException) {}
   }
   
   public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
