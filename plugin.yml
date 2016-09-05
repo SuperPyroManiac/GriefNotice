@@ -1,0 +1,14 @@
+name: GriefNotice
+main: me.SuperPyroManiac.spigot.GriefNotice
+version: 1.3
+author: hkenneth
+
+commands:
+    gn:
+        description: Grief Notice commands
+        usage: |
+            List of commands for Grief Notice:
+            /gn monitor playername - Starts monitor on playername
+            /gn status - Lists status
+            /gn checkplayer <playername> - lists log from playername
+            /gn tp <id> - Teleports player to location of ID
