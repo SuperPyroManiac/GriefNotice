@@ -59,12 +59,6 @@ public class GriefNotice
       }
       System.out.println("Table created successfully");
     }
-//    try
-//    {
-//      MetricsLite metrics = new MetricsLite(this);
-//      metrics.start();
-//    }
-//    catch (IOException localIOException) {}
   }
   
   public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
@@ -112,7 +106,7 @@ public class GriefNotice
               String fDate = sdf.format(time);
               ResultSet bs = ctmt.executeQuery("SELECT COUNT(playername) AS total FROM DATA WHERE playername = '" + name + "'");
               int count = bs.getInt("total");
-              player.sendMessage(ChatColor.AQUA + "ID: " + ChatColor.WHITE + breakid + ChatColor.AQUA + " Name: " + ChatColor.RED + name + ChatColor.AQUA + " Broke: " + ChatColor.WHITE + count + ChatColor.AQUA + " last break: " + ChatColor.WHITE + fDate);
+              player.sendMessage(ChatColor.GOLD + "ID: " + ChatColor.GRAY + breakid + ChatColor.GOLD + " Name: " + ChatColor.RED + name + ChatColor.GOLD + " Broke: " + ChatColor.GRAY + count + ChatColor.GOLD + " last break: " + ChatColor.GRAY + fDate);
             }
             player.sendMessage(ChatColor.DARK_GRAY + "- " + ChatColor.GOLD + "Use /gn checkplayer <playername> to view the log " + ChatColor.GOLD + " -");
             rs.close();
@@ -147,7 +141,7 @@ public class GriefNotice
               {
                 Location locationToTeleport = new Location(world, x, y, z);
                 player.teleport(locationToTeleport);
-                player.sendMessage(preFix + ChatColor.DARK_GRAY + "Teleporting you to: " + ChatColor.WHITE + x + ChatColor.AQUA + "," + ChatColor.WHITE + y + ChatColor.AQUA + "," + ChatColor.WHITE + z + ChatColor.AQUA + " in the world: " + ChatColor.WHITE + rs.getString("world"));
+                player.sendMessage(preFix + ChatColor.DARK_GRAY + "Teleporting you to: " + ChatColor.GRAY + x + ChatColor.GOLD + "," + ChatColor.GRAY + y + ChatColor.GOLD + "," + ChatColor.GRAY + z + ChatColor.GOLD + " in the world: " + ChatColor.GRAY + rs.getString("world"));
               }
             }
             rs.close();
@@ -170,7 +164,7 @@ public class GriefNotice
             c = DriverManager.getConnection("jdbc:sqlite:" + getDataFolder() + "//data.db");
             c.setAutoCommit(false);
             stmt = c.createStatement();
-            player.sendMessage(ChatColor.DARK_GRAY + " ----- " + ChatColor.DARK_RED + "Grief Notice " + ChatColor.DARK_GRAY + "- " + ChatColor.AQUA + "Last 10 Results: " + ChatColor.RED + args[1] + ChatColor.DARK_GRAY + " -----");
+            player.sendMessage(ChatColor.DARK_GRAY + " ----- " + ChatColor.DARK_RED + "Grief Notice " + ChatColor.DARK_GRAY + "- " + ChatColor.GOLD + "Last 10 Results: " + ChatColor.RED + args[1] + ChatColor.DARK_GRAY + " -----");
             if ((args.length == 2) && (args[0].equals("checkplayer")))
             {
               int offset = 0;
@@ -187,14 +181,14 @@ public class GriefNotice
                 Date time = new Date(timeStamp * 1000L);
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM-yyyy HH:mm:ss");
                 String fDate = sdf.format(time);
-                player.sendMessage(ChatColor.AQUA + "ID: " + ChatColor.WHITE + id + ChatColor.AQUA + " Time: " + ChatColor.WHITE + fDate + ChatColor.AQUA + " Block: " + ChatColor.WHITE + blockname + ChatColor.AQUA + " World: " + ChatColor.WHITE + world + ChatColor.AQUA + " Cords(ZYX): " + ChatColor.WHITE + Zcord + ChatColor.AQUA + "," + ChatColor.WHITE + Ycord + ChatColor.AQUA + "," + ChatColor.WHITE + Xcord);
+                player.sendMessage(ChatColor.GOLD + "ID: " + ChatColor.GRAY + id + ChatColor.GOLD + " Time: " + ChatColor.GRAY + fDate + ChatColor.GOLD + " Block: " + ChatColor.GRAY + blockname + ChatColor.GOLD + " World: " + ChatColor.GRAY + world + ChatColor.GOLD + " Cords(ZYX): " + ChatColor.GRAY + Zcord + ChatColor.GOLD + "," + ChatColor.GRAY + Ycord + ChatColor.GOLD + "," + ChatColor.GRAY + Xcord);
               }
               int count = 0;
               ResultSet res = stmt.executeQuery("SELECT COUNT(*) FROM DATA WHERE playername = '" + args[1] + "'");
               while (res.next()) {
                 count = res.getInt(1);
               }
-              player.sendMessage(ChatColor.DARK_GRAY + " ----- " + ChatColor.DARK_RED + "Grief Notice " + ChatColor.DARK_GRAY + " - " + ChatColor.AQUA + "Displaying page " + ChatColor.WHITE + "1" + ChatColor.AQUA + "/" + ChatColor.WHITE + (int)Math.ceil(count / 10.0D) + ChatColor.DARK_GRAY + " ----- ");
+              player.sendMessage(ChatColor.DARK_GRAY + " ----- " + ChatColor.DARK_RED + "Grief Notice " + ChatColor.DARK_GRAY + " - " + ChatColor.GOLD + "Displaying page " + ChatColor.GRAY + "1" + ChatColor.GOLD + "/" + ChatColor.GRAY + (int)Math.ceil(count / 10.0D) + ChatColor.DARK_GRAY + " ----- ");
               rs.close();
               stmt.close();
               c.close();
@@ -216,14 +210,14 @@ public class GriefNotice
                 Date time = new Date(timeStamp * 1000L);
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM-yyyy HH:mm:ss");
                 String fDate = sdf.format(time);
-                player.sendMessage(ChatColor.AQUA + "ID: " + ChatColor.WHITE + id + ChatColor.AQUA + " Time: " + ChatColor.WHITE + fDate + ChatColor.AQUA + " Block: " + ChatColor.WHITE + blockname + ChatColor.AQUA + " World: " + ChatColor.WHITE + world + ChatColor.AQUA + " Cords(ZYX): " + ChatColor.WHITE + Zcord + ChatColor.AQUA + "," + ChatColor.WHITE + Ycord + ChatColor.AQUA + "," + ChatColor.WHITE + Xcord);
+                player.sendMessage(ChatColor.GOLD + "ID: " + ChatColor.GRAY + id + ChatColor.GOLD + " Time: " + ChatColor.GRAY + fDate + ChatColor.GOLD + " Block: " + ChatColor.GRAY + blockname + ChatColor.GOLD + " World: " + ChatColor.GRAY + world + ChatColor.GOLD + " Cords(ZYX): " + ChatColor.GRAY + Zcord + ChatColor.GOLD + "," + ChatColor.GRAY + Ycord + ChatColor.GOLD + "," + ChatColor.GRAY + Xcord);
               }
               int count = 0;
               ResultSet res = stmt.executeQuery("SELECT COUNT(*) FROM DATA WHERE playername = '" + args[1] + "'");
               while (res.next()) {
                 count = res.getInt(1);
               }
-              player.sendMessage(ChatColor.DARK_GRAY + " ----- " + ChatColor.DARK_RED + "Grief Notice " + ChatColor.DARK_GRAY + " - " + ChatColor.AQUA + "Displaying page " + ChatColor.WHITE + offset / 10 + ChatColor.AQUA + "/" + ChatColor.WHITE + (int)Math.ceil(count / 10.0D) + ChatColor.DARK_GRAY + " ----- ");
+              player.sendMessage(ChatColor.DARK_GRAY + " ----- " + ChatColor.DARK_RED + "Grief Notice " + ChatColor.DARK_GRAY + " - " + ChatColor.GOLD + "Displaying page " + ChatColor.GRAY + offset / 10 + ChatColor.GOLD + "/" + ChatColor.GRAY + (int)Math.ceil(count / 10.0D) + ChatColor.DARK_GRAY + " ----- ");
               rs.close();
               stmt.close();
               c.close();
@@ -235,12 +229,15 @@ public class GriefNotice
             System.exit(0);
           }
         }
-        else if ((args[0] == "help")){
+        else if ((args[0].equals("help"))){
         	player.sendMessage(ChatColor.DARK_GRAY + " ----- " + ChatColor.DARK_RED + "Grief Notice " + ChatColor.DARK_GRAY + " ----- ");
-        	player.sendMessage(ChatColor.GOLD + "/gn status" + ChatColor.DARK_GRAY + "");
-        	player.sendMessage(ChatColor.GOLD + "/gn checkplayer <player> <page>" + ChatColor.DARK_GRAY + "");
-        	player.sendMessage(ChatColor.GOLD + "/gn tp <id>" + ChatColor.DARK_GRAY + "");
-        	player.sendMessage(ChatColor.GOLD + "/gn monitor <player>" + ChatColor.DARK_GRAY + "");
+        	player.sendMessage(ChatColor.GOLD + "/gn status" + ChatColor.DARK_GRAY + " Checks recent logs for possible griefs.");
+        	player.sendMessage(ChatColor.GOLD + "/gn checkplayer <player> <page>" + ChatColor.DARK_GRAY + " Checks player for their possible griefing logs.");
+        	player.sendMessage(ChatColor.GOLD + "/gn tp <id>" + ChatColor.DARK_GRAY + " Teleports to the ID.");
+        	player.sendMessage(ChatColor.GOLD + "/gn monitor <player>" + ChatColor.DARK_GRAY + " Monitors that player again.");
+        }
+        else if (args.length == 0){
+        	player.sendMessage(preFix + "Unknown Command. Use: " + ChatColor.GOLD + "/gn help");
         }
         else {
         	player.sendMessage(preFix + "Unknown Command. Use: " + ChatColor.GOLD + "/gn help");
