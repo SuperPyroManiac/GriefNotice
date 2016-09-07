@@ -21,6 +21,7 @@ public class GriefNotice
 {
   public BlockEventHandlers blockEventHandlers = new BlockEventHandlers(this);
   public NewPlayerCheck newPlayerCheck = new NewPlayerCheck(this);
+  static String preFix = (ChatColor.GOLD + "- " + ChatColor.DARK_GRAY + "[" + ChatColor.DARK_RED + "Grief Alert" + ChatColor.DARK_GRAY + "] ");
   
   public void onEnable()
   {
@@ -83,11 +84,11 @@ public class GriefNotice
         	  
           
             if (play.hasPermission("GriefNotice.announce")) {
-              play.sendMessage(ChatColor.WHITE + "[" + ChatColor.AQUA + "GriefNotice" + ChatColor.WHITE + "] " + ChatColor.RED + namy + ChatColor.AQUA + " was requested to be monitored again");
+              play.sendMessage(preFix + ChatColor.GOLD + namy + ChatColor.DARK_GRAY + " will be monitored again.");
             }
           }
         }
-        if ((args.length == 1) && (args[0].equals("status")))
+        else if ((args.length == 1) && (args[0].equals("status")))
         {
           Connection c = null;
           Statement stmt = null;
@@ -100,7 +101,7 @@ public class GriefNotice
             stmt = c.createStatement();
             ctmt = c.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT data.* FROM `data` INNER JOIN ( SELECT max( ID ) AS id FROM `data` GROUP BY playername ) AS id_join ON data.id = id_join.id ORDER BY ID DESC LIMIT 10");
-            player.sendMessage(ChatColor.WHITE + " ----- " + ChatColor.AQUA + "Grief Notice Check " + ChatColor.WHITE + "- " + ChatColor.AQUA + "Last 10 Results " + ChatColor.WHITE + "-----");
+            player.sendMessage(ChatColor.DARK_GRAY + " ----- " + ChatColor.DARK_RED + "Grief Notice Check " + ChatColor.DARK_GRAY + "- " + ChatColor.GOLD + "Last 10 Results " + ChatColor.DARK_GRAY + "-----");
             while (rs.next())
             {
               String name = rs.getString("playername");
@@ -113,7 +114,7 @@ public class GriefNotice
               int count = bs.getInt("total");
               player.sendMessage(ChatColor.AQUA + "ID: " + ChatColor.WHITE + breakid + ChatColor.AQUA + " Name: " + ChatColor.RED + name + ChatColor.AQUA + " Broke: " + ChatColor.WHITE + count + ChatColor.AQUA + " last break: " + ChatColor.WHITE + fDate);
             }
-            player.sendMessage(ChatColor.WHITE + "- " + ChatColor.AQUA + "Use /gn checkplayer <playername> to view the log " + ChatColor.WHITE + " -");
+            player.sendMessage(ChatColor.DARK_GRAY + "- " + ChatColor.GOLD + "Use /gn checkplayer <playername> to view the log " + ChatColor.GOLD + " -");
             rs.close();
             stmt.close();
             c.close();
@@ -124,7 +125,7 @@ public class GriefNotice
             System.exit(0);
           }
         }
-        if ((args.length == 2) && (args[0].equals("tp")))
+        else if ((args.length == 2) && (args[0].equals("tp")))
         {
           Connection c = null;
           Statement stmt = null;
@@ -146,7 +147,7 @@ public class GriefNotice
               {
                 Location locationToTeleport = new Location(world, x, y, z);
                 player.teleport(locationToTeleport);
-                player.sendMessage(ChatColor.AQUA + "Teleporting you to: " + ChatColor.WHITE + x + ChatColor.AQUA + "," + ChatColor.WHITE + y + ChatColor.AQUA + "," + ChatColor.WHITE + z + ChatColor.AQUA + " in the world: " + ChatColor.WHITE + rs.getString("world"));
+                player.sendMessage(preFix + ChatColor.DARK_GRAY + "Teleporting you to: " + ChatColor.WHITE + x + ChatColor.AQUA + "," + ChatColor.WHITE + y + ChatColor.AQUA + "," + ChatColor.WHITE + z + ChatColor.AQUA + " in the world: " + ChatColor.WHITE + rs.getString("world"));
               }
             }
             rs.close();
@@ -159,7 +160,7 @@ public class GriefNotice
             System.exit(0);
           }
         }
-        if (((args.length == 2) && (args[0].equals("checkplayer"))) || ((args.length == 3) && (args[0].equals("checkplayer"))))
+        else if (((args.length == 2) && (args[0].equals("checkplayer"))) || ((args.length == 3) && (args[0].equals("checkplayer"))))
         {
           Connection c = null;
           Statement stmt = null;
@@ -169,7 +170,7 @@ public class GriefNotice
             c = DriverManager.getConnection("jdbc:sqlite:" + getDataFolder() + "//data.db");
             c.setAutoCommit(false);
             stmt = c.createStatement();
-            player.sendMessage(ChatColor.WHITE + " ----- " + ChatColor.AQUA + "Grief Notice " + ChatColor.WHITE + "- " + ChatColor.AQUA + "Last 10 Results: " + ChatColor.RED + args[1] + ChatColor.WHITE + " -----");
+            player.sendMessage(ChatColor.DARK_GRAY + " ----- " + ChatColor.DARK_RED + "Grief Notice " + ChatColor.DARK_GRAY + "- " + ChatColor.AQUA + "Last 10 Results: " + ChatColor.RED + args[1] + ChatColor.DARK_GRAY + " -----");
             if ((args.length == 2) && (args[0].equals("checkplayer")))
             {
               int offset = 0;
@@ -193,7 +194,7 @@ public class GriefNotice
               while (res.next()) {
                 count = res.getInt(1);
               }
-              player.sendMessage(ChatColor.WHITE + " ----- " + ChatColor.AQUA + "Grief Notice " + ChatColor.WHITE + " - " + ChatColor.AQUA + "Displaying page " + ChatColor.WHITE + "1" + ChatColor.AQUA + "/" + ChatColor.WHITE + (int)Math.ceil(count / 10.0D) + ChatColor.WHITE + " ----- ");
+              player.sendMessage(ChatColor.DARK_GRAY + " ----- " + ChatColor.DARK_RED + "Grief Notice " + ChatColor.DARK_GRAY + " - " + ChatColor.AQUA + "Displaying page " + ChatColor.WHITE + "1" + ChatColor.AQUA + "/" + ChatColor.WHITE + (int)Math.ceil(count / 10.0D) + ChatColor.DARK_GRAY + " ----- ");
               rs.close();
               stmt.close();
               c.close();
@@ -222,7 +223,7 @@ public class GriefNotice
               while (res.next()) {
                 count = res.getInt(1);
               }
-              player.sendMessage(ChatColor.WHITE + " ----- " + ChatColor.AQUA + "Grief Notice " + ChatColor.WHITE + " - " + ChatColor.AQUA + "Displaying page " + ChatColor.WHITE + offset / 10 + ChatColor.AQUA + "/" + ChatColor.WHITE + (int)Math.ceil(count / 10.0D) + ChatColor.WHITE + " ----- ");
+              player.sendMessage(ChatColor.DARK_GRAY + " ----- " + ChatColor.DARK_RED + "Grief Notice " + ChatColor.DARK_GRAY + " - " + ChatColor.AQUA + "Displaying page " + ChatColor.WHITE + offset / 10 + ChatColor.AQUA + "/" + ChatColor.WHITE + (int)Math.ceil(count / 10.0D) + ChatColor.DARK_GRAY + " ----- ");
               rs.close();
               stmt.close();
               c.close();
@@ -234,6 +235,19 @@ public class GriefNotice
             System.exit(0);
           }
         }
+        else if ((args[0] == "help")){
+        	player.sendMessage(ChatColor.DARK_GRAY + " ----- " + ChatColor.DARK_RED + "Grief Notice " + ChatColor.DARK_GRAY + " ----- ");
+        	player.sendMessage(ChatColor.GOLD + "/gn status" + ChatColor.DARK_GRAY + "");
+        	player.sendMessage(ChatColor.GOLD + "/gn checkplayer <player> <page>" + ChatColor.DARK_GRAY + "");
+        	player.sendMessage(ChatColor.GOLD + "/gn tp <id>" + ChatColor.DARK_GRAY + "");
+        	player.sendMessage(ChatColor.GOLD + "/gn monitor <player>" + ChatColor.DARK_GRAY + "");
+        }
+        else {
+        	player.sendMessage(preFix + "Unknown Command. Use: " + ChatColor.GOLD + "/gn help");
+        }
+      }
+      else {
+    	  player.sendMessage(preFix + "You do have permission for this! (" + ChatColor.GOLD + "griefnotice.admin" + ChatColor.DARK_GRAY + ")");
       }
     }
     return true;

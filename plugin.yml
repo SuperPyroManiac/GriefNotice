@@ -1,13 +1,16 @@
 name: GriefNotice
 main: me.SuperPyroManiac.spigot.GriefNotice
-version: 1.3
-author: hkenneth
+version: 1.0
+author: SuperPyroManiac
+#Original creator - hkenneth - full credits to him for starting this project!
+#He created the foundation for this plugin that I am simply updating and adding things to!
+# https://dev.bukkit.org/bukkit-plugins/grief-notice/
 
 commands:
     gn:
         description: Grief Notice commands
         usage: |
-            List of commands for Grief Notice:
+            List of commands for Grief Alert:
             /gn monitor playername - Starts monitor on playername
             /gn status - Lists status
             /gn checkplayer <playername> - lists log from playername

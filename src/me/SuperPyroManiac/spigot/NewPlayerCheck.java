@@ -34,7 +34,7 @@ public HashMap<Player, Integer> maxblock = new HashMap();
     {
     	for (Player play : Bukkit.getServer().getOnlinePlayers()) {
         if (play.hasPermission("GriefNotice.announce")) {
-          play.sendMessage(ChatColor.WHITE + "[" + ChatColor.AQUA + "GriefNotice" + ChatColor.WHITE + "] " + ChatColor.RED + playername + ChatColor.AQUA + " logged in for the first time and will be monitored");
+          play.sendMessage(GriefNotice.preFix + ChatColor.GOLD + playername + ChatColor.GRAY + " has joined for the first time, and will be monitored.");
         }
       }
       this.blocklog.put(p, Boolean.valueOf(true));

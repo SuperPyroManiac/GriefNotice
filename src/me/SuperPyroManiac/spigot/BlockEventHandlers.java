@@ -62,7 +62,7 @@ public HashMap<Player, Set<Location>> blockplaced = new HashMap();
 
     	for (Player play : Bukkit.getServer().getOnlinePlayers()) {
         if (play.hasPermission("GriefNotice.announce")) {
-          play.sendMessage(ChatColor.WHITE + "[" + ChatColor.AQUA + "GriefNotice" + ChatColor.WHITE + "] " + ChatColor.RED + playername + ChatColor.AQUA + " broke " + ChatColor.WHITE + event.getBlock().getType() + ChatColor.AQUA + "(" + ChatColor.WHITE + event.getBlock().getTypeId() + ChatColor.AQUA + ") at X:" + ChatColor.WHITE + event.getBlock().getX() + ChatColor.AQUA + " Y:" + ChatColor.WHITE + event.getBlock().getY() + ChatColor.AQUA + " Z:" + ChatColor.WHITE + event.getBlock().getZ() + ChatColor.AQUA + " In world:" + ChatColor.WHITE + event.getBlock().getWorld().getName());
+          play.sendMessage(GriefNotice.preFix + ChatColor.RED + playername + ChatColor.DARK_GRAY + " broke " + ChatColor.GOLD + event.getBlock().getType() + ChatColor.DARK_GRAY + "(" + ChatColor.GOLD + event.getBlock().getTypeId() + ChatColor.DARK_GRAY + ") at X:" + ChatColor.WHITE + event.getBlock().getX() + ChatColor.AQUA + " Y:" + ChatColor.WHITE + event.getBlock().getY() + ChatColor.AQUA + " Z:" + ChatColor.WHITE + event.getBlock().getZ() + ChatColor.AQUA + " In world:" + ChatColor.WHITE + event.getBlock().getWorld().getName());
         }
       }
       Connection c = null;
@@ -93,7 +93,7 @@ public HashMap<Player, Set<Location>> blockplaced = new HashMap();
         if (play.hasPermission("GriefNotice.announce"))
         {
           this.plugin.newPlayerCheck.blocklog.put(player, Boolean.valueOf(false));
-          play.sendMessage(ChatColor.WHITE + "[" + ChatColor.AQUA + "GriefNotice" + ChatColor.WHITE + "] " + ChatColor.RED + playername + ChatColor.AQUA + " Exeeded " + ChatColor.RED + countblocks + ChatColor.AQUA + " block breaks. Monitoring on player stopped");
+          play.sendMessage(GriefNotice.preFix + ChatColor.RED + playername + ChatColor.DARK_GRAY + " Exeeded " + ChatColor.GOLD + countblocks + ChatColor.DARK_GRAY + " block breaks. Monitoring on player stopped");
         }
       }
     }
