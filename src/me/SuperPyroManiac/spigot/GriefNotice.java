@@ -66,6 +66,10 @@ public class GriefNotice
     if (cmd.getName().equalsIgnoreCase("gn"))
     {
       Player player = (Player)sender;
+      if (args.length == 0){
+      	player.sendMessage(preFix + "Unknown Command. Use: " + ChatColor.GOLD + "/gn help");
+      	return false;
+      }
       if (player.hasPermission("GriefNotice.admin"))
       {
         if ((args.length == 2) && (args[0].equals("monitor")))
@@ -235,9 +239,6 @@ public class GriefNotice
         	player.sendMessage(ChatColor.GOLD + "/gn checkplayer <player> <page>" + ChatColor.DARK_GRAY + " Checks player for their possible griefing logs.");
         	player.sendMessage(ChatColor.GOLD + "/gn tp <id>" + ChatColor.DARK_GRAY + " Teleports to the ID.");
         	player.sendMessage(ChatColor.GOLD + "/gn monitor <player>" + ChatColor.DARK_GRAY + " Monitors that player again.");
-        }
-        else if (args.length == 0){
-        	player.sendMessage(preFix + "Unknown Command. Use: " + ChatColor.GOLD + "/gn help");
         }
         else {
         	player.sendMessage(preFix + "Unknown Command. Use: " + ChatColor.GOLD + "/gn help");
