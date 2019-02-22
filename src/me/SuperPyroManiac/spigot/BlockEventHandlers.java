@@ -16,6 +16,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 
+
 public class BlockEventHandlers
   implements Listener
 {
@@ -27,8 +28,7 @@ public HashMap<Player, Set<Location>> blockplaced = new HashMap();
   {
     this.plugin = plugin;
   }
-  
-  @SuppressWarnings("deprecation")
+
 @EventHandler(ignoreCancelled=true, priority=EventPriority.MONITOR)
   public void BlockBreakEvent(BlockBreakEvent event)
   {
@@ -50,7 +50,7 @@ public HashMap<Player, Set<Location>> blockplaced = new HashMap();
     if (((Set<?>)this.blockplaced.get(player)).contains(event.getBlock().getLocation())) {
       return;
     }
-    int blockID = event.getBlock().getTypeId();
+    int blockID = event.getBlock().getType().getId();
     int maxblocks = this.plugin.getConfig().getInt("Blockbreaks");
     int countblocks = ((Integer)this.plugin.newPlayerCheck.countblock.get(player)).intValue();
     int plusblocks = countblocks + 1;
@@ -62,7 +62,7 @@ public HashMap<Player, Set<Location>> blockplaced = new HashMap();
 
     	for (Player play : Bukkit.getServer().getOnlinePlayers()) {
         if (play.hasPermission("GriefNotice.announce")) {
-          play.sendMessage(GriefNotice.preFix + ChatColor.RED + playername + ChatColor.DARK_GRAY + " broke " + ChatColor.GOLD + event.getBlock().getType() + ChatColor.DARK_GRAY + "(" + ChatColor.GOLD + event.getBlock().getTypeId() + ChatColor.DARK_GRAY + ") at X:" + ChatColor.WHITE + event.getBlock().getX() + ChatColor.AQUA + " Y:" + ChatColor.WHITE + event.getBlock().getY() + ChatColor.AQUA + " Z:" + ChatColor.WHITE + event.getBlock().getZ() + ChatColor.AQUA + " In world:" + ChatColor.WHITE + event.getBlock().getWorld().getName());
+          play.sendMessage(GriefNotice.preFix + ChatColor.RED + playername + ChatColor.DARK_GRAY + " broke " + ChatColor.GOLD + event.getBlock().getType() + ChatColor.DARK_GRAY + "(" + ChatColor.GOLD + event.getBlock().getType().getId() + ChatColor.DARK_GRAY + ") at X:" + ChatColor.WHITE + event.getBlock().getX() + ChatColor.AQUA + " Y:" + ChatColor.WHITE + event.getBlock().getY() + ChatColor.AQUA + " Z:" + ChatColor.WHITE + event.getBlock().getZ() + ChatColor.AQUA + " In world:" + ChatColor.WHITE + event.getBlock().getWorld().getName());
         }
       }
       Connection c = null;
@@ -75,7 +75,7 @@ public HashMap<Player, Set<Location>> blockplaced = new HashMap();
         stmt = c.createStatement();
         long unixTime = System.currentTimeMillis() / 1000L;
         String sql = "INSERT INTO DATA (playername, blockname, blockid, zvalue, xvalue, yvalue, world, location, time) VALUES ('" + 
-          playername + "', '" + event.getBlock().getType() + "', " + event.getBlock().getTypeId() + ", " + event.getBlock().getZ() + ", " + event.getBlock().getX() + ", " + event.getBlock().getY() + ", '" + event.getBlock().getWorld().getName() + "', '" + event.getBlock().getLocation() + "', '" + unixTime + "');";
+          playername + "', '" + event.getBlock().getType() + "', " + event.getBlock().getType().getId() + ", " + event.getBlock().getZ() + ", " + event.getBlock().getX() + ", " + event.getBlock().getY() + ", '" + event.getBlock().getWorld().getName() + "', '" + event.getBlock().getLocation() + "', '" + unixTime + "');";
         stmt.executeUpdate(sql);
         stmt.close();
         c.commit();
