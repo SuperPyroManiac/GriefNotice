@@ -21,7 +21,7 @@ public class GriefNotice
 {
     public BlockEventHandlers blockEventHandlers = new BlockEventHandlers(this);
     public NewPlayerCheck newPlayerCheck = new NewPlayerCheck(this);
-    static String preFix = (ChatColor.GOLD + "- " + ChatColor.DARK_GRAY + "[" + ChatColor.DARK_RED + "Grief Alert" + ChatColor.DARK_GRAY + "] ");
+    static String preFix = (ChatColor.GOLD + "- " + ChatColor.DARK_GRAY + "[" + ChatColor.DARK_RED + "Grief Notice" + ChatColor.DARK_GRAY + "] ");
 
     public void onEnable()
     {
